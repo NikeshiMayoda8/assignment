@@ -67,3 +67,37 @@ body {
   }
   
 /*Footer*/
+.footer {
+    background: #55392c; 
+    color: #d4c0ac; 
+    padding: 24px 0;
+    text-align: center;
+  }
+  
+  .footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+  
+  .footer a {
+    color: #d4c0ac;
+    text-decoration: none;
+    margin: 0 10px;
+  }
+  
+  .footer a:hover {
+    text-decoration: underline;
+  }
+  
+  @media (max-width: 768px) {
+    .footer-content {
+      padding: 0 16px;
+    }
+  
+    .footer a {
+      display: block;
+      margin: 10px 0;
+    }
+  }
+  

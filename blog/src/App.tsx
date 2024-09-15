@@ -1,6 +1,7 @@
 import React from 'react';
 import { Layout } from 'antd';
 import Navbar from './components/Navbar';
+import FooterComponent from './components/Footer';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
 import Blog from './pages/Blog';
@@ -25,6 +26,7 @@ const App: React.FC = () => {
               </Routes>
             </div>
           </Content>
+          <FooterComponent />
         </Layout>
       </Layout>
     </Router>
