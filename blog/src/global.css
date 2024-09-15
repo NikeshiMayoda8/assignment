@@ -100,4 +100,117 @@ body {
       margin: 10px 0;
     }
   }
+
+ /*Button*/ 
+  .custom-button {
+    border-radius: 4px; 
+    font-weight: bold;  
+    transition: all 0.3s ease; 
+  }
+  
+  .custom-button.small {
+    padding: 4px 8px;
+    font-size: 12px;
+  }
+  
+  .custom-button.medium {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+  
+  .custom-button.large {
+    padding: 12px 24px;
+    font-size: 16px;
+  }
+  
+  .custom-button.primary {
+    background-color: #55392c; 
+    color: #d4c0ac; 
+    border: none; 
+  }
+  
+  .custom-button.primary:hover {
+    background-color: #d4c0ac; 
+    color: #55392c; 
+    border: 1px solid #55392c; 
+  }
+  
+  .custom-button.secondary {
+    background-color: #d4c0ac; 
+    color: #55392c; 
+    border: none; 
+  }
+  
+  .custom-button.secondary:hover {
+    background-color: #55392c; 
+    color: #d4c0ac; 
+    border: 1px solid #d4c0ac; 
+  }
+  
+  /*Hero-Section*/
+  .hero-section {
+    width: 100%;
+    background-color: #fff; 
+    padding: 40px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .hero-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px; 
+    width: 100%;
+  }
+  
+  .hero-text {
+    flex: 1;
+    color: #55392c;
+    text-align: left;
+    padding-right: 20px; 
+  }
+  
+  .hero-slogan {
+    font-size: 3rem; 
+    margin-bottom: 20px;
+    font-weight: bold;
+  }
+  
+  .hero-subheader {
+    font-size: 1.5rem; 
+    margin-bottom: 30px;
+  }
+  
+  .hero-image {
+    background-image: url('/images/heroimg2.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    max-width: 45%;
+    height: 300px; 
+    border-radius: 10px;
+    background-color: lightgray; 
+  }
+  
+  
+  @media (max-width: 768px) {
+    .hero-content {
+      flex-direction: column; 
+      text-align: center;
+    }
+  
+    .hero-text {
+      padding-right: 0;
+      padding-bottom: 20px; 
+    }
+  
+    .hero-image {
+      max-width: 100%; 
+      height: auto; 
+    }
+  }
+  
+  
   
