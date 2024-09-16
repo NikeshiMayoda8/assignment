@@ -328,3 +328,51 @@ body {
     padding: 20px;
   }
   
+/*top-recipes*/  
+  .top-recipes-section, .new-recipes-section {
+    padding: 40px 0;
+  }
+  
+  .section-title {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 2rem;
+  }
+  
+  .recipe-cards {
+    display: flex;
+    justify-content: space-around;
+  }
+  
+  .recipe-card {
+    width: 20%;
+    text-align: center;
+  }
+  
+  .recipe-img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+ 
+/*new-recipes*/  
+  .new-recipes-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .new-recipe-image img {
+    width: 400px;
+    height: auto;
+    border-radius: 8px;
+  }
+  
+  .new-recipe-list {
+    max-width: 600px;
+  }
+  
+  .new-recipe-item {
+    font-size: 1.5rem;
+    margin: 10px 0;
+  } 
