@@ -8,6 +8,8 @@ import Blog from './pages/Blog';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import AddEditBlog from './pages/AddEditBlog';
+import AllBlogs from './pages/AllBlogs';
+
 
 const { Content } = Layout;
 
@@ -21,8 +23,10 @@ const App: React.FC = () => {
             <div className="site-layout-content">
               <Routes>
                 <Route path="/" element={<Home />} />
+                <Route path="/blog" element={<AllBlogs />} />
                 <Route path="/blog/:id" element={<Blog />} />
                 <Route path="/edit-blog/:id" element={<AddEditBlog />} />
+                <Route path="/add-blog" element={<AddEditBlog />} />
                 <Route path="/about" element={<About />} />
                 <Route path="/contact" element={<Contact />} />
               </Routes>

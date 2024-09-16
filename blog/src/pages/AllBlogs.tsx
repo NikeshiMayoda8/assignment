@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Button from '../components/Button';
 import axios from 'axios';
 
 interface Recipe {
@@ -38,15 +37,32 @@ const AllBlogs: React.FC = () => {
     navigate(`/blog/${id}`);
   };
 
+  const handleAddBlog = () => {
+    navigate('/add-blog/'); 
+  };
+
   return (
     <div>
-    
+
+      <div className="add-blog-section flex justify-end p-4">
+        <button
+          onClick={handleAddBlog}
+          className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+        >
+          Add New Blog
+        </button>
+      </div>
+
       <div className="top-recipes-section">
         <h2 className="section-title">Top Recipes</h2>
         <div className="recipe-cards">
           {recipes.slice(0, 4).map((recipe) => (
             <div key={recipe.id} className="recipe-card" onClick={() => handleNavigation(recipe.id)}>
-              <img src={`http://127.0.0.1:8090/api/files/posts/${recipe.id}/${recipe.image}`} alt={recipe.title} className="recipe-img" />
+              <img
+                src={`http://127.0.0.1:8090/api/files/posts/${recipe.id}/${recipe.image}`}
+                alt={recipe.title}
+                className="recipe-img"
+              />
               <h3 className="recipe-title">{recipe.title}</h3>
             </div>
           ))}

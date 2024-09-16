@@ -40,7 +40,6 @@ const AddEditBlog: React.FC = () => {
           setLoading(false);
         }
       } else {
-     
         setLoading(false);
       }
     };
@@ -64,7 +63,6 @@ const AddEditBlog: React.FC = () => {
       }
 
       if (id) {
-  
         await axios.patch(`http://127.0.0.1:8090/api/collections/posts/records/${id}`, formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
@@ -72,14 +70,13 @@ const AddEditBlog: React.FC = () => {
         });
         navigate(`/blog/${id}`);
       } else {
-      
-        const addresponse =  await axios.post('http://127.0.0.1:8090/api/collections/posts/records', formData, {
+        const addresponse = await axios.post('http://127.0.0.1:8090/api/collections/posts/records', formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },
         });
 
-        navigate('/blog/'+ addresponse.data.id);
+        navigate('/blog/' + addresponse.data.id);
       }
     } catch (err) {
       console.error('Error saving blog data:', err);
@@ -91,48 +88,52 @@ const AddEditBlog: React.FC = () => {
   if (error) return <div className="flex justify-center items-center h-screen text-xl text-red-500">{error}</div>;
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen p-4 bg-gray-100">
-      <div className="w-full max-w-md p-6 bg-white rounded-lg shadow-lg">
-        <h1 className="text-2xl font-bold mb-4">{id ? 'Edit Blog' : 'Add Blog'}</h1>
-        <div className="mb-4">
-          <label htmlFor="title" className="block text-sm font-medium text-gray-700">Title</label>
-          <input
-            type="text"
-            id="title"
-            value={blogData.title}
-            onChange={(e) => setBlogData({ ...blogData, title: e.target.value })}
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-          />
-        </div>
-        <div className="mb-4">
-          <label htmlFor="description" className="block text-sm font-medium text-gray-700">Description</label>
-          <textarea
-            id="description"
-            value={blogData.description}
-            onChange={(e) => setBlogData({ ...blogData, description: e.target.value })}
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-            rows={5}
-          />
-        </div>
-        <div className="mb-4">
-          <label htmlFor="image" className="block text-sm font-medium text-gray-700">Image Upload</label>
-          <input
-            type="file"
-            id="image"
-            onChange={handleFileChange}
-            className="mt-1 block w-full text-sm text-gray-500 file:py-2 file:px-4 file:border file:border-gray-300 file:rounded-md file:text-sm file:font-medium file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
-          />
-        </div>
-        <div className="flex gap-4">
-          <button
-            onClick={handleSave}
-            className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-          >
-            {id ? 'Update' : 'Create'} Blog
-          </button>
-        </div>
+    <div className="form-container flex flex-col items-center justify-center min-h-screen p-4 bg-gray-100">
+    <div className="form-card w-full max-w-md p-6 bg-white rounded-lg shadow-lg space-y-6">
+      <h1 className="title text-2xl font-bold mb-4 text-center">{id ? 'Edit Blog' : 'Add Blog'}</h1>
+      <div className="input-group mb-4">
+        <label htmlFor="title" className="label block text-sm font-medium text-gray-700">Title</label>
+        <input
+          type="text"
+          id="title"
+          value={blogData.title}
+          onChange={(e) => setBlogData({ ...blogData, title: e.target.value })}
+          className="input   
+   mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+        />
+      </div>
+      <div   
+   className="input-group mb-4">
+        <label htmlFor="description" className="label block text-sm font-medium text-gray-700">Description</label>
+        <textarea
+          id="description"
+          value={blogData.description}
+          onChange={(e) => setBlogData({ ...blogData, description: e.target.value })}
+          className="input mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"   
+  
+          
+        ></textarea>
+      </div>
+      <div className="input-group mb-4">
+        <label htmlFor="image" className="label block text-sm font-medium text-gray-700">Image Upload</label>
+        <input
+          type="file"
+          id="image"
+          onChange={handleFileChange}
+          className="input mt-1 block w-full text-sm text-gray-500 file:py-2 file:px-4 file:border file:border-gray-300 file:rounded-md file:text-sm file:font-medium file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+        />
+      </div>
+      <div className="button-group flex justify-center">
+        <button
+          onClick={handleSave}
+          className="button bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"   
+  
+        >
+          {id ? 'Update' : 'Create'} Blog
+        </button>
       </div>
     </div>
+  </div>
   );
 };
 

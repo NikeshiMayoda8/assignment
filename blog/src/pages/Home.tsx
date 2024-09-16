@@ -1,12 +1,41 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom'; 
-import Button from '../components/Button'; 
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import Button from '../components/Button';
+import axios from 'axios';
+
+interface Recipe {
+  id: string;
+  title: string;
+  image: string;
+  description: string;
+}
 
 const Home: React.FC = () => {
+  const [recipes, setRecipes] = useState<Recipe[]>([]);
   const navigate = useNavigate();
 
-  const handleNavigation = (recipe: string) => {
-    navigate(`/blog?recipe=${recipe}`); 
+  const fetchRecipes = async () => {
+    try {
+      const response = await axios.get('http://127.0.0.1:8090/api/collections/posts/records');
+      const items = response.data.items;
+      const recipes = items.map((item: any) => ({
+        id: item.id,
+        title: item.title,
+        image: item.image,
+        description: item.description,
+      }));
+      setRecipes(recipes);
+    } catch (error) {
+      console.error('Error fetching recipes:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchRecipes();
+  }, []);
+
+  const handleNavigation = (id: string) => {
+    navigate(`/blog/${id}`);
   };
 
   return (
@@ -22,47 +51,33 @@ const Home: React.FC = () => {
           <div className="hero-image"></div>
         </div>
       </div>
-      
+
+    
       <div className="top-recipes-section">
         <h2 className="section-title">Top Recipes</h2>
         <div className="recipe-cards">
-          <div className="recipe-card" onClick={() => handleNavigation('Chocolate Cake')}>
-            <img src="/images/chocolatecake.jpeg" alt="Recipe 1" className="recipe-img" />
-            <h3 className="recipe-title">Chocolate Cake</h3>
-          </div>
-          <div className="recipe-card" onClick={() => handleNavigation('Strawberry Cheesecake')}>
-            <img src="/images/strawberry1.jpg" alt="Recipe 2" className="recipe-img" />
-            <h3 className="recipe-title">Strawberry Cheesecake</h3>
-          </div>
-          <div className="recipe-card" onClick={() => handleNavigation('Lemon Tart')}>
-            <img src="/images/lemonpie.jpeg" alt="Recipe 3" className="recipe-img" />
-            <h3 className="recipe-title">Lemon Tart</h3>
-          </div>
-          <div className="recipe-card" onClick={() => handleNavigation('Red Velvet Cupcake')}>
-            <img src="/images/redvelvetcake1.png" alt="Recipe 4" className="recipe-img" />
-            <h3 className="recipe-title">Red Velvet Cupcake</h3>
-          </div>
+          {recipes.slice(0, 4).map((recipe) => (
+            <div key={recipe.id} className="recipe-card" onClick={() => handleNavigation(recipe.id)}>
+              <img src={`http://127.0.0.1:8090/api/files/posts/${recipe.id}/${recipe.image}`} alt={recipe.title} className="recipe-img" />
+              <h3 className="recipe-title">{recipe.title}</h3>
+            </div>
+          ))}
         </div>
       </div>
-     
+
       <div className="new-recipes-section">
         <h2 className="section-title">New Recipes</h2>
         <div className="new-recipes-content">
           <div className="new-recipe-image">
-            <img src="/images/smoothie.png" alt="New Recipe" />
+            <img src="http://127.0.0.1:8090/api/files/smoothie.png" alt="New Recipe" />
           </div>
           <div className="new-recipe-list">
-            <h3 className="new-recipe-item" onClick={() => handleNavigation('Banana Bread')}>Banana Bread</h3>
-            <p>A moist and delicious banana bread with a hint of vanilla.</p>
-
-            <h3 className="new-recipe-item" onClick={() => handleNavigation('Matcha Cookies')}>Matcha Cookies</h3>
-            <p>Soft and chewy cookies infused with earthy matcha flavor.</p>
-
-            <h3 className="new-recipe-item" onClick={() => handleNavigation('Peach Cobbler')}>Peach Cobbler</h3>
-            <p>A comforting dessert filled with fresh peaches and buttery crust.</p>
-
-            <h3 className="new-recipe-item" onClick={() => handleNavigation('Tiramisu')}>Tiramisu</h3>
-            <p>A classic Italian dessert with layers of coffee-soaked ladyfingers and mascarpone cream.</p>
+            {recipes.slice(4).map((recipe) => (
+              <div key={recipe.id} className="new-recipe-item" onClick={() => handleNavigation(recipe.id)}>
+                <h3 className="new-recipe-title">{recipe.title}</h3>
+                <p>{recipe.description}</p>
+              </div>
+            ))}
           </div>
         </div>
       </div>
